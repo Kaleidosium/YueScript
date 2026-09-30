@@ -165,5 +165,26 @@ EOF
 assert_success "Compile with target 5.1" $YUE_BIN "$TMP_DIR/test_target.yue" -o "$TMP_DIR/test_target.lua" --target 5.1
 assert_file_exists "Target version compilation should succeed" "$TMP_DIR/test_target.lua"
 
+# Test 13: --path keeps Lua's ';;' default-path insertion point
+echo ""
+echo "Testing --path default path marker..."
+mkdir -p "$TMP_DIR/modules"
+cat > "$TMP_DIR/path_marker.yue" << 'EOF'
+export macro marker = -> '"default"'
+EOF
+
+cat > "$TMP_DIR/modules/path_marker.yue" << 'EOF'
+export macro marker = -> '"custom"'
+EOF
+
+cat > "$TMP_DIR/path_marker_test.yue" << 'EOF'
+import "path_marker" as $
+value = $marker!
+EOF
+
+YUE_BIN_ABS="$(cd "$(dirname "$YUE_BIN")" && pwd)/$(basename "$YUE_BIN")"
+assert_output_contains "Double semicolon inserts the default path in place" 'value = "default"' \
+	bash -c 'cd "$1" && "$2" --target 5.1 -c -l -p --path ";;./modules/?.lua" path_marker_test.yue' _ "$TMP_DIR" "$YUE_BIN_ABS"
+
 echo ""
 print_summary

@@ -5786,12 +5786,9 @@ private:
 			passOptions();
 			auto it = _config.options.find("path"s);
 			if (it != _config.options.end()) {
-				lua_getglobal(L, "package");
-				auto path = it->second + ';';
-				lua_pushlstring(L, path.c_str(), path.size());
-				lua_getfield(L, -2, "path");
-				lua_concat(L, 2);
-				lua_setfield(L, -2, "path");
+				pushYue("set_modulepath"sv);
+				lua_pushlstring(L, it->second.c_str(), it->second.size());
+				lua_call(L, 1, 0);
 			}
 			_stateOwner = true;
 		}
