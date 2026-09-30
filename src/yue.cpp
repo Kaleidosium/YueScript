@@ -1090,13 +1090,24 @@ int main(int narg, const char** args) {
 					DEFER(lua_settop(L, top));
 					lua_getfield(L, -1, rewrite ? "FormatYue" : "FormatMini");
 					lua_pushlstring(L, s.c_str(), s.size());
-					if (lua_pcall(L, 1, 1, 0) != 0) {
+					if (lua_pcall(L, 1, 2, 0) != 0) {
 						ret = 2;
-						std::string err = lua_tostring(L, -1);
+						const char* error = lua_tostring(L, -1);
+						std::string err = error ? error : "unknown formatter error"s;
+						errs.push_back((rewrite ? "Failed to rewrite: "s : "Failed to minify: "s) + file + '\n' + err + '\n');
+					} else if (lua_isnil(L, -2) != 0) {
+						ret = 2;
+						const char* error = lua_tostring(L, -1);
+						std::string err = error ? error : "formatter returned no output"s;
 						errs.push_back((rewrite ? "Failed to rewrite: "s : "Failed to minify: "s) + file + '\n' + err + '\n');
 					} else {
 						size_t size = 0;
-						const char* transformedCodes = lua_tolstring(L, -1, &size);
+						const char* transformedCodes = lua_tolstring(L, -2, &size);
+						if (!transformedCodes) {
+							ret = 2;
+							errs.push_back((rewrite ? "Failed to rewrite: "s : "Failed to minify: "s) + file + "\nformatter returned invalid output\n"s);
+							continue;
+						}
 						if (writeToFile) {
 							std::ofstream output(file, std::ios::trunc | std::ios::out);
 							output.write(transformedCodes, size);

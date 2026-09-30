@@ -186,5 +186,18 @@ YUE_BIN_ABS="$(cd "$(dirname "$YUE_BIN")" && pwd)/$(basename "$YUE_BIN")"
 assert_output_contains "Double semicolon inserts the default path in place" 'value = "default"' \
 	bash -c 'cd "$1" && "$2" --target 5.1 -c -l -p --path ";;./modules/?.lua" path_marker_test.yue' _ "$TMP_DIR" "$YUE_BIN_ABS"
 
+# Test 14: Lua 5.3 floor division survives rewriting and minification
+echo ""
+echo "Testing floor division formatting..."
+cat > "$TMP_DIR/floor_division.yue" << 'EOF'
+x = 7 // 2
+print x
+EOF
+
+assert_success "Rewrite code with floor division" $YUE_BIN --target 5.3 -r -o "$TMP_DIR/floor_division_rewritten.lua" "$TMP_DIR/floor_division.yue"
+assert_output_contains "Rewritten code keeps floor division" "//" cat "$TMP_DIR/floor_division_rewritten.lua"
+assert_success "Minify code with floor division" $YUE_BIN --target 5.3 -m -o "$TMP_DIR/floor_division_minified.lua" "$TMP_DIR/floor_division.yue"
+assert_output_contains "Minified code keeps floor division" "//" cat "$TMP_DIR/floor_division_minified.lua"
+
 echo ""
 print_summary

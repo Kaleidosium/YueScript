@@ -651,6 +651,13 @@ local function LexLua(src)
 					toEmit = {Type = 'Symbol', Data = ':'}
 				end
 
+			elseif consume('/') then
+				if consume('/') then
+					toEmit = {Type = 'Symbol', Data = '//'}
+				else
+					toEmit = {Type = 'Symbol', Data = '/'}
+				end
+
 			elseif Symbols[c] then
 				get()
 				toEmit = {Type = 'Symbol', Data = c}
@@ -1232,6 +1239,7 @@ local function ParseLua(src)
 		['-'] = {6,6};
 		['%'] = {7,7};
 		['/'] = {7,7};
+		['//'] = {7,7};
 		['*'] = {7,7};
 		['^'] = {10,9};
 		['..'] = {5,4};
