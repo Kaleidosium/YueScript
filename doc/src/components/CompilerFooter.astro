@@ -21,7 +21,9 @@ const messages = {
 };
 ---
 
-<Footer><slot /></Footer>
+<Footer>
+  <slot />
+</Footer>
 <dialog
   id="yue-compiler-dialog"
   aria-labelledby="yue-compiler-title"
@@ -33,9 +35,9 @@ const messages = {
       <span translate="no">YueScript</span>
       {messages.title}
     </h2>
-    <button type="button" data-yue-close aria-label={messages.close}
-      ><Icon name="close" /></button
-    >
+    <button type="button" data-yue-close aria-label={messages.close}>
+      <Icon name="close" />
+    </button>
   </div>
   <div data-yue-modal>{messages.loading}</div>
 </dialog>

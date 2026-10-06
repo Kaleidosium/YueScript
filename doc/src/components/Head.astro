@@ -12,17 +12,15 @@ import heroFont from "@fontsource/noto-serif/files/noto-serif-latin-900-normal.w
   type="font/woff2"
   crossorigin="anonymous"
 />
-{
-  Astro.locals.starlightRoute.entry.data.template === "splash" && (
-    <link
-      rel="preload"
-      href={heroFont}
-      as="font"
-      type="font/woff2"
-      crossorigin="anonymous"
-    />
-  )
-}
+{Astro.locals.starlightRoute.entry.data.template === "splash" && (
+  <link
+    rel="preload"
+    href={heroFont}
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
+)}
 <meta name="theme-color" content="#0b0e14" />
 
 <script is:inline>
@@ -45,9 +43,9 @@ import heroFont from "@fontsource/noto-serif/files/noto-serif-latin-900-normal.w
   const syncThemeColor = () =>
     themeColor?.setAttribute(
       "content",
-      document.documentElement.dataset.theme === "light"
-        ? "#fdfbf7"
-        : "#0b0e14",
+      document.documentElement.dataset.theme === "light" ?
+        "#fdfbf7"
+      : "#0b0e14",
     );
   syncThemeColor();
   new MutationObserver(syncThemeColor).observe(document.documentElement, {

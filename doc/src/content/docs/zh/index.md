@@ -3,7 +3,8 @@ hero:
   tagline: 一门令人愉悦且可编译为 Lua 的语言
   image:
     alt: 月之脚本
-    html: <a href="/zh/doc/extras/mascot/"><img width="1071" height="1500" decoding="async" fetchpriority="high" src="/image/mascot/electrichearts_20260211A_yuescript_xiaoyu.png"
+    html:
+      <a href="/zh/doc/extras/mascot/"><img width="1071" height="1500" decoding="async" fetchpriority="high" src="/image/mascot/electrichearts_20260211A_yuescript_xiaoyu.png"
       alt="月之脚本" /></a>
   actions:
     - text: 快速上手 →

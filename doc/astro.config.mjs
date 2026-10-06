@@ -8,7 +8,12 @@ import { locales } from "./src/locales.mjs";
 const allInOneLabels = Object.fromEntries(
   Object.values(locales).map(({ lang }) => [
     lang,
-    JSON.parse(readFileSync(new URL(`./src/content/i18n/${lang}.json`, import.meta.url), "utf8"))["yue.allInOne"],
+    JSON.parse(
+      readFileSync(
+        new URL(`./src/content/i18n/${lang}.json`, import.meta.url),
+        "utf8",
+      ),
+    )["yue.allInOne"],
   ]),
 );
 

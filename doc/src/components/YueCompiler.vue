@@ -2,7 +2,11 @@
   <div class="not-content yue-compiler">
     <div class="parent">
       <div class="editor-section">
-        <div class="childTitle"><span translate="no">YueScript</span>&nbsp;<span role="status">{{ info }}</span></div>
+        <div class="childTitle">
+          <span translate="no">YueScript</span>&nbsp;<span role="status">{{
+            info
+          }}</span>
+        </div>
         <div class="editor-container">
           <div ref="codeEditor" class="code-editor"></div>
         </div>
@@ -14,43 +18,56 @@
         </div>
       </div>
     </div>
-    <p :class="compileError ? 'compiler-status' : 'sr-only'" role="status">{{ compilationStatus }}</p>
+    <p :class="compileError ? 'compiler-status' : 'sr-only'" role="status">
+      {{ compilationStatus }}
+    </p>
     <div v-if="!compileronly" class="compiler-actions">
-      <output class="resultArea" name="program-output" :aria-label="messages.programOutput" role="status" tabindex="0">{{ result }}</output>
-      <button type="button" class="button" :disabled="readonly" @click="runCode()">{{ messages.run }}</button>
+      <output
+        class="resultArea"
+        name="program-output"
+        :aria-label="messages.programOutput"
+        role="status"
+        tabindex="0"
+        >{{ result }}</output
+      >
+      <button
+        type="button"
+        class="button"
+        :disabled="readonly"
+        @click="runCode()"
+      >
+        {{ messages.run }}
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import {
-  defaultKeymap,
-  history,
-  historyKeymap,
-} from '@codemirror/commands';
+import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
 import {
   HighlightStyle,
   indentUnit,
   StreamLanguage,
   syntaxHighlighting,
-} from '@codemirror/language';
-import { lua } from '@codemirror/legacy-modes/mode/lua';
-import { simpleMode } from '@codemirror/legacy-modes/mode/simple-mode';
-import {
-  Compartment,
-  EditorState,
-} from '@codemirror/state';
-import {
-  EditorView,
-  keymap,
-  lineNumbers,
-} from '@codemirror/view';
-import { tags } from '@lezer/highlight';
+} from "@codemirror/language";
+import { lua } from "@codemirror/legacy-modes/mode/lua";
+import { simpleMode } from "@codemirror/legacy-modes/mode/simple-mode";
+import { Compartment, EditorState } from "@codemirror/state";
+import { EditorView, keymap, lineNumbers } from "@codemirror/view";
+import { tags } from "@lezer/highlight";
 
 const TRY_PAGE_DRAFT_KEY = "yuescript.try.code";
 const TRY_PAGE_DRAFT_SAVE_DELAY = 1000;
 
-function createEditorTheme({ bg, fg, gutterColor, selectionBg, cursorColor, matchingBracketBg, dark }) {
+function createEditorTheme({
+  bg,
+  fg,
+  gutterColor,
+  selectionBg,
+  cursorColor,
+  matchingBracketBg,
+  dark,
+}) {
   return EditorView.theme(
     {
       "&": {
@@ -82,13 +99,23 @@ function createEditorTheme({ bg, fg, gutterColor, selectionBg, cursorColor, matc
 }
 
 const lightPlusTheme = createEditorTheme({
-  bg: "#FFFFFF", fg: "#000000", gutterColor: "#6e6e6e",
-  selectionBg: "#add6ff", cursorColor: "#000000", matchingBracketBg: "#c9def5", dark: false,
+  bg: "#FFFFFF",
+  fg: "#000000",
+  gutterColor: "#6e6e6e",
+  selectionBg: "#add6ff",
+  cursorColor: "#000000",
+  matchingBracketBg: "#c9def5",
+  dark: false,
 });
 
 const darkPlusTheme = createEditorTheme({
-  bg: "#1E1E1E", fg: "#D4D4D4", gutterColor: "#858585",
-  selectionBg: "#264f78", cursorColor: "#aeafad", matchingBracketBg: "#3a3d41", dark: true,
+  bg: "#1E1E1E",
+  fg: "#D4D4D4",
+  gutterColor: "#858585",
+  selectionBg: "#264f78",
+  cursorColor: "#aeafad",
+  matchingBracketBg: "#3a3d41",
+  dark: true,
 });
 
 function createHighlightStyle(c) {
@@ -127,17 +154,35 @@ function createHighlightStyle(c) {
 }
 
 const lightPlusHighlightStyle = createHighlightStyle({
-  comment: "#008000", keyword: "#AF00DB", punctuation: "#000000",
-  string: "#a31515", regexp: "#811f3f", number: "#098658",
-  function: "#795e26", type: "#267f99", property: "#001080",
-  tag: "#800000", attribute: "#e50000", meta: "#666666", invalid: "#cd3131",
+  comment: "#008000",
+  keyword: "#AF00DB",
+  punctuation: "#000000",
+  string: "#a31515",
+  regexp: "#811f3f",
+  number: "#098658",
+  function: "#795e26",
+  type: "#267f99",
+  property: "#001080",
+  tag: "#800000",
+  attribute: "#e50000",
+  meta: "#666666",
+  invalid: "#cd3131",
 });
 
 const darkPlusHighlightStyle = createHighlightStyle({
-  comment: "#6a9955", keyword: "#C586C0", punctuation: "#d4d4d4",
-  string: "#ce9178", regexp: "#d16969", number: "#b5cea8",
-  function: "#dcdcaa", type: "#4ec9b0", property: "#9cdcfe",
-  tag: "#569cd6", attribute: "#9cdcfe", meta: "#d4d4d4", invalid: "#f44747",
+  comment: "#6a9955",
+  keyword: "#C586C0",
+  punctuation: "#d4d4d4",
+  string: "#ce9178",
+  regexp: "#d16969",
+  number: "#b5cea8",
+  function: "#dcdcaa",
+  type: "#4ec9b0",
+  property: "#9cdcfe",
+  tag: "#569cd6",
+  attribute: "#9cdcfe",
+  meta: "#d4d4d4",
+  invalid: "#f44747",
 });
 
 export default {
@@ -187,7 +232,11 @@ export default {
     compiled(text) {
       if (this.luaView) {
         this.luaView.dispatch({
-          changes: { from: 0, to: this.luaView.state.doc.length, insert: text.replace(/\n$/, "") },
+          changes: {
+            from: 0,
+            to: this.luaView.state.doc.length,
+            insert: text.replace(/\n$/, ""),
+          },
         });
       }
     },
@@ -595,7 +644,9 @@ export default {
               constant: tags.constant(tags.variableName),
             },
           }),
-          EditorView.contentAttributes.of({ "aria-label": this.messages.source }),
+          EditorView.contentAttributes.of({
+            "aria-label": this.messages.source,
+          }),
           indentUnit.of("  "),
           this.readOnlyCompartment.of(EditorState.readOnly.of(this.readonly)),
           this.highlightCompartment.of(
@@ -621,11 +672,16 @@ export default {
             StreamLanguage.define(lua),
             EditorState.readOnly.of(true),
             EditorView.editable.of(false),
-            EditorView.contentAttributes.of({ "aria-label": this.messages.luaOutput, tabindex: "0" }),
+            EditorView.contentAttributes.of({
+              "aria-label": this.messages.luaOutput,
+              tabindex: "0",
+            }),
             this.themeCompartment.of(isDark ? darkPlusTheme : lightPlusTheme),
-            this.highlightCompartment.of(syntaxHighlighting(
-              isDark ? darkPlusHighlightStyle : lightPlusHighlightStyle,
-            )),
+            this.highlightCompartment.of(
+              syntaxHighlighting(
+                isDark ? darkPlusHighlightStyle : lightPlusHighlightStyle,
+              ),
+            ),
           ],
         }),
       });
@@ -639,19 +695,20 @@ export default {
         return;
       }
       const isDark = this.isDarkTheme();
-      for (const view of [this.editorView, this.luaView]) view?.dispatch({
-        effects: [
-          this.themeCompartment.reconfigure(
-            isDark ? darkPlusTheme : lightPlusTheme,
-          ),
-          this.highlightCompartment.reconfigure(
-            syntaxHighlighting(
-              isDark ? darkPlusHighlightStyle : lightPlusHighlightStyle,
-              { fallback: true },
+      for (const view of [this.editorView, this.luaView])
+        view?.dispatch({
+          effects: [
+            this.themeCompartment.reconfigure(
+              isDark ? darkPlusTheme : lightPlusTheme,
             ),
-          ),
-        ],
-      });
+            this.highlightCompartment.reconfigure(
+              syntaxHighlighting(
+                isDark ? darkPlusHighlightStyle : lightPlusHighlightStyle,
+                { fallback: true },
+              ),
+            ),
+          ],
+        });
     },
     refreshEditorReadOnly() {
       if (!this.editorView || !this.readOnlyCompartment) {
@@ -676,14 +733,12 @@ export default {
     },
     codeChanged(text) {
       if (window.yue) {
-        let res = [
-          "",
-          this.messages.failed,
-        ];
+        let res = ["", this.messages.failed];
         try {
           res = window.yue.tolua(text, true, !this.displayonly, true);
           this.compileError = res[0] === "" && res[1] !== "";
-          this.compilationStatus = this.compileError ? res[1] : this.messages.complete;
+          this.compilationStatus =
+            this.compileError ? res[1] : this.messages.complete;
           if (res[0] !== "") {
             this.compiled = res[0];
           } else {
@@ -813,7 +868,6 @@ export default {
   font-size: 0.875rem;
   overflow-wrap: anywhere;
 }
-
 
 .code-editor {
   height: 100%;
