@@ -2,7 +2,15 @@ import { readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import vue from "@astrojs/vue";
-import { locales, allInOneLabels } from "./src/locales.mjs";
+import { locales } from "./src/locales.mjs";
+
+// The sidebar config runs before Astro loads content collections.
+const allInOneLabels = Object.fromEntries(
+  Object.values(locales).map(({ lang }) => [
+    lang,
+    JSON.parse(readFileSync(new URL(`./src/content/i18n/${lang}.json`, import.meta.url), "utf8"))["yue.allInOne"],
+  ]),
+);
 
 const grammar = JSON.parse(
   readFileSync(
@@ -47,6 +55,7 @@ export default defineConfig({
     },
     vue(),
     starlight({
+      disable404Route: true,
       title: "YueScript",
       logo: { src: "./public/image/yuescript.svg", alt: "" },
       description: "A delightful language that compiles to Lua",

@@ -2,11 +2,11 @@
 import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import AggregateContent from '../../components/AggregateContent.astro';
-import { locales, allInOneLabels } from '../../locales.mjs';
+import { locales } from '../../locales.mjs';
 
 interface Props {
   locale: string;
-  lang: keyof typeof allInOneLabels;
+  lang: string;
 }
 
 export function getStaticPaths() {
@@ -30,7 +30,7 @@ const sections = await Promise.all(
 );
 ---
 
-<StarlightPage lang={lang} frontmatter={{ title: allInOneLabels[lang], tableOfContents: false }}>
+<StarlightPage lang={lang} frontmatter={{ title: Astro.locals.t('yue.allInOne'), tableOfContents: false }}>
   {sections.map(({ entry, Content }) => (
     <article id={entry.id}>
       <h2>{entry.data.title}</h2>

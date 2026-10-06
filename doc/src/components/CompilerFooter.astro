@@ -1,20 +1,45 @@
 ---
 import Footer from '@astrojs/starlight/components/Footer.astro';
 import { Icon } from '@astrojs/starlight/components';
+
+const { t } = Astro.locals;
+const messages = {
+  title: t('yue.compiler.title'),
+  close: t('yue.compiler.close'),
+  loading: t('yue.compiler.loading'),
+  loadError: t('yue.compiler.loadError'),
+  modalLoadError: t('yue.compiler.modalLoadError'),
+  buildRuntime: t('yue.compiler.buildRuntime'),
+  compile: t('yue.compiler.compile'),
+  run: t('yue.compiler.run'),
+  programOutput: t('yue.compiler.programOutput'),
+  source: t('yue.compiler.source'),
+  luaOutput: t('yue.compiler.luaOutput'),
+  finished: t('yue.compiler.finished'),
+  complete: t('yue.compiler.complete'),
+  failed: t('yue.compiler.failed'),
+};
 ---
 
 <Footer><slot /></Footer>
-<dialog id="yue-compiler-dialog" aria-labelledby="yue-compiler-title" data-pagefind-ignore>
+<dialog id="yue-compiler-dialog" aria-labelledby="yue-compiler-title" data-pagefind-ignore data-yue-messages={JSON.stringify(messages)}>
   <div class="dialog-header">
-    <h2 id="yue-compiler-title"><span translate="no">YueScript</span> Compiler</h2>
-    <button type="button" data-yue-close aria-label="Close Compiler"><Icon name="close" /></button>
+    <h2 id="yue-compiler-title"><span translate="no">YueScript</span> {messages.title}</h2>
+    <button type="button" data-yue-close aria-label={messages.close}><Icon name="close" /></button>
   </div>
-  <div data-yue-modal>Loading compiler…</div>
+  <div data-yue-modal>{messages.loading}</div>
 </dialog>
 
 <script>
   import type { App } from 'vue';
 
+  const dialog = document.querySelector<HTMLDialogElement>('#yue-compiler-dialog')!;
+  const messages: {
+    loading: string;
+    loadError: string;
+    modalLoadError: string;
+    buildRuntime: string;
+  } = JSON.parse(dialog.dataset.yueMessages!);
   const runtime = window as typeof window & {
     Module?: { onRuntimeInitialized: () => void };
     yue?: { version: () => string; tolua: () => string[]; exec: () => string };
@@ -31,9 +56,9 @@ import { Icon } from '@astrojs/starlight/components';
     script.src = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/js/yuescript.js`;
     script.onerror = () => {
       runtime.yue = {
-        version: () => '(build with: make wasm)',
-        tolua: () => ['', 'Build the YueScript compiler with: make wasm'],
-        exec: () => 'Build the YueScript compiler with: make wasm',
+        version: () => messages.buildRuntime,
+        tolua: () => ['', messages.buildRuntime],
+        exec: () => messages.buildRuntime,
       };
       window.dispatchEvent(new Event('yue:ready'));
     };
@@ -47,15 +72,14 @@ import { Icon } from '@astrojs/starlight/components';
 
   for (const container of document.querySelectorAll('[data-yue-compiler]')) {
     container.setAttribute('aria-busy', 'true');
-    container.textContent = 'Loading compiler…';
+    container.textContent = messages.loading;
     loadCompiler().then(([{ createApp }, { default: YueCompiler }]) => {
-      createApp(YueCompiler).mount(container);
+      createApp(YueCompiler, { messages }).mount(container);
     }).catch(() => {
       container.setAttribute('role', 'alert');
-      container.textContent = 'The compiler could not load. Reload the page to try again.';
+      container.textContent = messages.loadError;
     }).finally(() => container.removeAttribute('aria-busy'));
   }
-  const dialog = document.querySelector<HTMLDialogElement>('#yue-compiler-dialog')!;
   const modal = dialog.querySelector<HTMLElement>('[data-yue-modal]')!;
   let compiler: App | undefined;
   let request = 0;
@@ -65,7 +89,7 @@ import { Icon } from '@astrojs/starlight/components';
     compiler = undefined;
     modal.removeAttribute('aria-busy');
     modal.removeAttribute('role');
-    modal.textContent = 'Loading compiler…';
+    modal.textContent = messages.loading;
   });
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
@@ -85,12 +109,12 @@ import { Icon } from '@astrojs/starlight/components';
     try {
       const [{ createApp }, { default: YueCompiler }] = await loadCompiler();
       if (!dialog.open || currentRequest !== request) return;
-      compiler = createApp(YueCompiler, { text, compileronly: true, displayonly: true });
+      compiler = createApp(YueCompiler, { messages, text, compileronly: true, displayonly: true });
       compiler.mount(modal);
     } catch {
       if (dialog.open && currentRequest === request) {
         modal.setAttribute('role', 'alert');
-        modal.textContent = 'The compiler could not load. Close it and try again.';
+        modal.textContent = messages.modalLoadError;
       }
     } finally {
       if (currentRequest === request) modal.removeAttribute('aria-busy');

@@ -4,7 +4,7 @@ import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
 const tryHref = `${Astro.locals.starlightRoute.siteTitleHref}try/`;
 ---
 
-<a class="try-link" href={tryHref}>Try yue!</a>
+<a class="try-link" href={tryHref}>{Astro.locals.t('yue.try')}</a>
 <SocialIcons />
 
 <style>

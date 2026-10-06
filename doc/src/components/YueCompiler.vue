@@ -16,8 +16,8 @@
     </div>
     <p :class="compileError ? 'compiler-status' : 'sr-only'" role="status">{{ compilationStatus }}</p>
     <div v-if="!compileronly" class="compiler-actions">
-      <output class="resultArea" name="program-output" aria-label="Program output" role="status" tabindex="0">{{ result }}</output>
-      <button type="button" class="button" :disabled="readonly" @click="runCode()">Run Code</button>
+      <output class="resultArea" name="program-output" :aria-label="messages.programOutput" role="status" tabindex="0">{{ result }}</output>
+      <button type="button" class="button" :disabled="readonly" @click="runCode()">{{ messages.run }}</button>
     </div>
   </div>
 </template>
@@ -142,6 +142,10 @@ const darkPlusHighlightStyle = createHighlightStyle({
 
 export default {
   props: {
+    messages: {
+      type: Object,
+      required: true,
+    },
     compileronly: {
       type: Boolean,
       default: false,
@@ -157,7 +161,7 @@ export default {
   },
   data() {
     return {
-      info: "Loading…",
+      info: this.messages.loading,
       readonly: true,
       code: "",
       compiled: "",
@@ -591,7 +595,7 @@ export default {
               constant: tags.constant(tags.variableName),
             },
           }),
-          EditorView.contentAttributes.of({ "aria-label": "YueScript source" }),
+          EditorView.contentAttributes.of({ "aria-label": this.messages.source }),
           indentUnit.of("  "),
           this.readOnlyCompartment.of(EditorState.readOnly.of(this.readonly)),
           this.highlightCompartment.of(
@@ -617,7 +621,7 @@ export default {
             StreamLanguage.define(lua),
             EditorState.readOnly.of(true),
             EditorView.editable.of(false),
-            EditorView.contentAttributes.of({ "aria-label": "Lua output", tabindex: "0" }),
+            EditorView.contentAttributes.of({ "aria-label": this.messages.luaOutput, tabindex: "0" }),
             this.themeCompartment.of(isDark ? darkPlusTheme : lightPlusTheme),
             this.highlightCompartment.of(syntaxHighlighting(
               isDark ? darkPlusHighlightStyle : lightPlusHighlightStyle,
@@ -667,19 +671,19 @@ export default {
         } catch (err) {
           res = String(err);
         }
-        this.result = res || "Program finished without output.";
+        this.result = res || this.messages.finished;
       }
     },
     codeChanged(text) {
       if (window.yue) {
         let res = [
           "",
-          "The compiler failed. Try again or report this code at github.com/IppClub/YueScript/issues.",
+          this.messages.failed,
         ];
         try {
           res = window.yue.tolua(text, true, !this.displayonly, true);
           this.compileError = res[0] === "" && res[1] !== "";
-          this.compilationStatus = this.compileError ? res[1] : "Compilation complete. Lua output updated.";
+          this.compilationStatus = this.compileError ? res[1] : this.messages.complete;
           if (res[0] !== "") {
             this.compiled = res[0];
           } else {
