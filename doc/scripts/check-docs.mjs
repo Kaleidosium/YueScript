@@ -170,6 +170,19 @@ assert.ok(notFound.includes("Page not found. Check the URL or try using the sear
 assert.doesNotMatch(notFound, /http-equiv="refresh"/, "404.html must not redirect");
 assert.ok(!notFound.includes("data-pagefind-body"), "404 must stay out of search results");
 
+for (const [locale, { lang }] of Object.entries(locales)) {
+  if (locale === "root") continue;
+  const route = `/${locale}/404/`;
+  const html = readFileSync(`dist${route}index.html`, "utf8");
+  checkInterface(html, route);
+  checkTranslations(html, lang, route);
+  assert.ok(html.includes(`lang="${lang}"`), `Wrong 404 language: ${route}`);
+  assert.ok(decodeHtml(html).includes(translations[lang]["404.text"]), `Missing localized 404 message: ${route}`);
+  assert.match(html, /<h1\b[^>]*>404<\/h1>/, `Missing 404 heading: ${route}`);
+  assert.ok(html.includes(`href="/${locale}/"`), `Missing localized home link: ${route}`);
+  assert.doesNotMatch(html, /http-equiv="refresh"|data-pagefind-body/, `404 must not redirect or appear in search: ${route}`);
+}
+
 assert.ok(
   !readdirSync(".").some((file) => /^yue-.*\.md$/.test(file)),
   "Standalone yue-*.md manuals must be removed",

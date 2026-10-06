@@ -2,6 +2,7 @@
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const home = Astro.props.home ?? base;
 ---
 
 <StarlightPage
@@ -15,7 +16,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       image: {
         html: `<img class="not-found-mascot" src="${base}image/mascot/electrichearts_20260211A_yuescript_xiaoyu.png" width="1071" height="1500" alt="" decoding="async" fetchpriority="high" />`,
       },
-      actions: [{ text: Astro.locals.t('yue.404.home'), link: base, icon: 'left-arrow', attrs: { iconPlacement: 'start' }, variant: 'primary' }],
+      actions: [{ text: Astro.locals.t('yue.404.home'), link: home, icon: 'left-arrow', attrs: { iconPlacement: 'start' }, variant: 'primary' }],
     },
   }}
 />
