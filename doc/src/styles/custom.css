@@ -1,11 +1,11 @@
-@import "@fontsource/merriweather/400.css";
-@import "@fontsource/merriweather/600.css";
-@import "@fontsource/merriweather/700.css";
-@import "@fontsource/merriweather/900.css";
-@import "@fontsource/merriweather/400-italic.css";
-@import "@fontsource/merriweather/600-italic.css";
-@import "@fontsource/merriweather/700-italic.css";
-@import "@fontsource/merriweather/900-italic.css";
+@import "@fontsource/noto-serif/400.css";
+@import "@fontsource/noto-serif/600.css";
+@import "@fontsource/noto-serif/700.css";
+@import "@fontsource/noto-serif/900.css";
+@import "@fontsource/noto-serif/400-italic.css";
+@import "@fontsource/noto-serif/600-italic.css";
+@import "@fontsource/noto-serif/700-italic.css";
+@import "@fontsource/noto-serif/900-italic.css";
 
 @import "@fontsource/noto-serif-sc/400.css";
 @import "@fontsource/noto-serif-sc/700.css";
@@ -18,7 +18,7 @@
   --sl-font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
-  --font-serif: "Merriweather", "Noto Serif SC", serif;
+  --font-serif: "Noto Serif", "Noto Serif SC", serif;
 
   /* --- BRAND COLORS (Original Moon Gold) --- */
   --vp-c-brand-1: #b4ac8f;
@@ -231,7 +231,7 @@ h6,
 .site-title,
 .hero h1,
 .hero [data-page-title] {
-  font-family: "Merriweather", "Noto Serif SC", serif !important;
+  font-family: "Noto Serif", "Noto Serif SC", serif !important;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -541,7 +541,7 @@ button[data-yue-compile]:hover {
   margin-bottom: 0.5rem !important;
   font-size: 1.2rem !important;
   color: var(--sl-color-white);
-  font-family: "Merriweather", "Noto Serif SC", serif !important;
+  font-family: "Noto Serif", "Noto Serif SC", serif !important;
   letter-spacing: -0.02em;
 }
 

@@ -766,7 +766,7 @@ export default {
 .childTitle {
   width: 100%;
   font-size: 1.1em;
-  font-family: "Merriweather", "Noto Serif SC", serif;
+  font-family: "Noto Serif", "Noto Serif SC", serif;
   color: var(--sl-color-white);
   font-weight: bold;
   text-align: center;
