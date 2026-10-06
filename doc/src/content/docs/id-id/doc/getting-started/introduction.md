@@ -1,6 +1,6 @@
 ---
 prev: false
-title: Pendahuluan
+title: Mengenal YueScript
 sidebar:
   order: 1
 ---

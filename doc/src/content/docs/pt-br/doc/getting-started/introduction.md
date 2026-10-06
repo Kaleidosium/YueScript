@@ -1,6 +1,6 @@
 ---
 prev: false
-title: Introdução
+title: Introdução ao YueScript
 sidebar:
   order: 1
 ---

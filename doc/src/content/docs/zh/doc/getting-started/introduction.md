@@ -1,6 +1,6 @@
 ---
 prev: false
-title: 介绍
+title: YueScript 介绍
 sidebar:
   order: 1
 ---
