@@ -9,7 +9,7 @@ YueScript is a dynamic language that compiles to Lua. And it's a [MoonScript](ht
 
 Yue (月) is the name of moon in Chinese and it's pronounced as [jyɛ].
 
-## An Overview of YueScript
+## A Taste of YueScript
 
 ```yuescript
 -- import syntax

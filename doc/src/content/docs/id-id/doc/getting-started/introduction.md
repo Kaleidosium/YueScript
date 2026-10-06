@@ -9,7 +9,7 @@ YueScript adalah bahasa dinamis yang dikompilasi ke Lua, dan merupakan dialek [M
 
 Yue (月) adalah kata untuk bulan dalam bahasa Tionghoa dan diucapkan sebagai [jyɛ].
 
-## Ikhtisar YueScript
+## Mengenal YueScript lewat contoh
 
 ```yuescript
 -- import syntax

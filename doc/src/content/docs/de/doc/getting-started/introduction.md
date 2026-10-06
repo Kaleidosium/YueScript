@@ -9,7 +9,7 @@ YueScript ist eine dynamische Sprache, die zu Lua kompiliert. Sie ist ein Dialek
 
 Yue (月) ist das chinesische Wort für Mond und wird als [jyɛ] ausgesprochen.
 
-## Ein Überblick über YueScript
+## Ein Vorgeschmack auf YueScript
 
 ```yuescript
 -- Import-Syntax

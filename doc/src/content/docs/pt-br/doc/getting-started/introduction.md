@@ -9,7 +9,7 @@ YueScript é uma linguagem dinâmica que compila para Lua. É um dialeto do [Moo
 
 Yue (月) é o nome da lua em chinês e é pronunciado como [jyɛ].
 
-## Uma visão geral do YueScript
+## Um gostinho de YueScript
 
 ```yuescript
 -- sintaxe de importação
