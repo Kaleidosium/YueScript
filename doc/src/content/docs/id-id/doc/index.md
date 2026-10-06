@@ -1,5 +1,6 @@
 ---
-title: Referensi
+next: false
+title: Selamat datang
 sidebar:
   order: 0
 tableOfContents: false

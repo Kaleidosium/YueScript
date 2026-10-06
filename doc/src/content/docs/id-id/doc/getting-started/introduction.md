@@ -1,4 +1,5 @@
 ---
+prev: false
 title: Pendahuluan
 sidebar:
   order: 1

@@ -1,5 +1,6 @@
 ---
-title: Referenz
+next: false
+title: Willkommen
 sidebar:
   order: 0
 tableOfContents: false

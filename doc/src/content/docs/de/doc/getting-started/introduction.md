@@ -1,4 +1,5 @@
 ---
+prev: false
 title: Einführung
 sidebar:
   order: 1

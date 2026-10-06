@@ -1,7 +1,9 @@
 @import "@fontsource/merriweather/400.css";
+@import "@fontsource/merriweather/600.css";
 @import "@fontsource/merriweather/700.css";
 @import "@fontsource/merriweather/900.css";
 @import "@fontsource/merriweather/400-italic.css";
+@import "@fontsource/merriweather/600-italic.css";
 @import "@fontsource/merriweather/700-italic.css";
 @import "@fontsource/merriweather/900-italic.css";
 
@@ -456,6 +458,16 @@ starlight-lang-select select {
 .sl-link-button.primary:hover {
   background-color: #a39b7d !important;
   border-color: #a39b7d !important;
+}
+
+.sidebar-content .top-level .large {
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+
+.pagination-links .link-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
 }
 
 button[data-yue-compile] {

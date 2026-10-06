@@ -1,5 +1,6 @@
 ---
-title: 参考手册
+next: false
+title: 欢迎
 sidebar:
   order: 0
 tableOfContents: false
