@@ -1,0 +1,9 @@
+---
+import MarkdownContent from '@astrojs/starlight/components/MarkdownContent.astro';
+
+const html = (await Astro.slots.render('default')).replace(
+  /<(pre|code)\b(?![^>]*\stranslate\s*=)/g, '<$1 translate="no"',
+);
+---
+
+<MarkdownContent><Fragment set:html={html} /></MarkdownContent>
