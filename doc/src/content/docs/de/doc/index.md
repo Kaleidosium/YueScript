@@ -10,4 +10,4 @@ tableOfContents: false
 
 Willkommen in der offiziellen <b>YueScript</b>-Dokumentation!<br/>
 Hier findest du Sprachfeatures, Nutzung, Referenzbeispiele und Ressourcen.<br/>
-Bitte wähle ein Kapitel in der Seitenleiste, um mit YueScript zu beginnen.
+Bitte wähle ein Kapitel in der Navigation, um mit YueScript zu beginnen.

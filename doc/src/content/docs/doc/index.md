@@ -10,4 +10,4 @@ tableOfContents: false
 
 Welcome to the <b>YueScript</b> official documentation!<br/>
 Here you can find the language features, usage, reference examples and resources.<br/>
-Please select a chapter from the sidebar to start learning about YueScript.
+Please select a chapter from the navigation to start learning about YueScript.

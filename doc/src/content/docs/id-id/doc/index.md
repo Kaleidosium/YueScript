@@ -10,4 +10,4 @@ tableOfContents: false
 
 Selamat datang di dokumentasi resmi <b>YueScript</b>!<br/>
 Di sini Anda dapat menemukan fitur bahasa, penggunaan, contoh referensi, dan sumber daya.<br/>
-Silakan pilih bab dari sidebar untuk mulai mempelajari YueScript.
+Silakan pilih bab dari navigasi untuk mulai mempelajari YueScript.
