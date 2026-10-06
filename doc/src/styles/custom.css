@@ -114,6 +114,11 @@
   outline-offset: 3px;
 }
 
+:root[data-input-modality="pointer"]
+  :where(a, button, input, textarea, output, select, summary):focus-visible {
+  outline: none;
+}
+
 .header :where(a, button, select):focus-visible {
   outline-offset: 2px;
 }

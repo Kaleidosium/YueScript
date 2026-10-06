@@ -733,9 +733,13 @@ export default {
   font-size: 13px;
 }
 
-.resultArea:focus-visible {
+:root:not([data-input-modality="pointer"]) .resultArea:focus-visible {
   outline: 2px solid var(--sl-color-text-accent);
   outline-offset: 2px;
+}
+
+:root[data-input-modality="pointer"] .resultArea:focus-visible {
+  outline: none;
 }
 
 .parent {

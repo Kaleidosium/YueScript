@@ -12,6 +12,13 @@ import heroFont from '@fontsource/merriweather/files/merriweather-latin-900-norm
 <meta name="theme-color" content="#0b0e14" />
 
 <script is:inline>
+  document.addEventListener('pointerdown', () => {
+    document.documentElement.dataset.inputModality = 'pointer';
+  }, true);
+  document.addEventListener('keydown', () => {
+    document.documentElement.dataset.inputModality = 'keyboard';
+  }, true);
+
   const themeColor = document.querySelector('meta[name="theme-color"]');
   const syncThemeColor = () => themeColor?.setAttribute(
     'content', document.documentElement.dataset.theme === 'light' ? '#fdfbf7' : '#0b0e14',
