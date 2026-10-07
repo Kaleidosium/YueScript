@@ -210,6 +210,10 @@ header.header {
   color: var(--sl-color-black);
 }
 
+.sl-skip-link {
+  font-weight: 600;
+}
+
 .sl-markdown-content a {
   text-underline-offset: 0.18em;
 }
@@ -487,7 +491,7 @@ button[data-yue-compile] {
   border: none;
   display: inline-block;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-on-brand) !important;
   background-color: var(--vp-c-brand-1) !important;
   text-decoration: none;
