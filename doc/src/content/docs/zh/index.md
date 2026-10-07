@@ -14,6 +14,7 @@ hero:
     - text: 试试 yue！
       link: /zh/try/
       variant: minimal
+      icon: right-caret
 title: 首页
 sidebar:
   order: -1

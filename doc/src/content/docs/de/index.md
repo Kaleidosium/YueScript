@@ -14,6 +14,7 @@ hero:
     - text: yue ausprobieren!
       link: /de/try/
       variant: minimal
+      icon: right-caret
 title: Startseite
 sidebar:
   order: -1

@@ -15,6 +15,7 @@ hero:
     - text: Try yue!
       link: /try/
       variant: minimal
+      icon: right-caret
 title: Home
 sidebar:
   order: -1

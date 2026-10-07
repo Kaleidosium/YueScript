@@ -14,6 +14,7 @@ hero:
     - text: Coba yue!
       link: /id-id/try/
       variant: minimal
+      icon: right-caret
 title: Beranda
 sidebar:
   order: -1
