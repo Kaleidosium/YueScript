@@ -1,5 +1,6 @@
 ---
 hero:
+  title: YueScript
   tagline: A delightful language that compiles to Lua
   image:
     alt: YueScript
@@ -14,7 +15,7 @@ hero:
     - text: Try yue!
       link: /try/
       variant: minimal
-title: YueScript
+title: Home
 sidebar:
   order: -1
 template: splash

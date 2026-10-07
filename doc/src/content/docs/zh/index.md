@@ -1,5 +1,6 @@
 ---
 hero:
+  title: 月之脚本
   tagline: 一门令人愉悦且可编译为 Lua 的语言
   image:
     alt: 月之脚本
@@ -13,7 +14,7 @@ hero:
     - text: 试试 yue！
       link: /zh/try/
       variant: minimal
-title: 月之脚本
+title: 首页
 sidebar:
   order: -1
 template: splash

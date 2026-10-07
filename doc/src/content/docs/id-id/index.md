@@ -1,5 +1,6 @@
 ---
 hero:
+  title: YueScript
   tagline: Bahasa menyenangkan yang dikompilasi ke Lua
   image:
     alt: YueScript
@@ -13,7 +14,7 @@ hero:
     - text: Coba yue!
       link: /id-id/try/
       variant: minimal
-title: YueScript
+title: Beranda
 sidebar:
   order: -1
 template: splash
