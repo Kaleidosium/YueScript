@@ -1,15 +1,15 @@
 @import "@fontsource/noto-serif/400.css";
 @import "@fontsource/noto-serif/600.css";
 @import "@fontsource/noto-serif/700.css";
-@import "@fontsource/noto-serif/900.css";
+@import "@fontsource/noto-serif/800.css";
 @import "@fontsource/noto-serif/400-italic.css";
 @import "@fontsource/noto-serif/600-italic.css";
 @import "@fontsource/noto-serif/700-italic.css";
-@import "@fontsource/noto-serif/900-italic.css";
+@import "@fontsource/noto-serif/800-italic.css";
 
 @import "@fontsource/noto-serif-sc/400.css";
 @import "@fontsource/noto-serif-sc/700.css";
-@import "@fontsource/noto-serif-sc/900.css";
+@import "@fontsource/noto-serif-sc/800.css";
 
 :root {
   /* --- TYPOGRAPHY --- */
@@ -340,7 +340,7 @@ starlight-lang-select select {
 /* Make the Hero Title (YueScript) feel more "Editorial" */
 .hero h1,
 .hero [data-page-title] {
-  font-weight: 900 !important;
+  font-weight: 800 !important;
   color: var(--sl-color-accent) !important;
 }
 
