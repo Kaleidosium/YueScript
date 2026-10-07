@@ -43,11 +43,7 @@
 </template>
 
 <script>
-import {
-  defaultKeymap,
-  history,
-  historyKeymap,
-} from "@codemirror/commands";
+import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
 import {
   HighlightStyle,
   indentUnit,
@@ -56,15 +52,8 @@ import {
 } from "@codemirror/language";
 import { lua } from "@codemirror/legacy-modes/mode/lua";
 import { simpleMode } from "@codemirror/legacy-modes/mode/simple-mode";
-import {
-  Compartment,
-  EditorState,
-} from "@codemirror/state";
-import {
-  EditorView,
-  keymap,
-  lineNumbers,
-} from "@codemirror/view";
+import { Compartment, EditorState } from "@codemirror/state";
+import { EditorView, keymap, lineNumbers } from "@codemirror/view";
 import { tags } from "@lezer/highlight";
 
 const TRY_PAGE_DRAFT_KEY = "yuescript.try.code";
