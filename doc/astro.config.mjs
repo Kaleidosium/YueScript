@@ -1,7 +1,10 @@
-import { readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+
 import { defineConfig } from "astro/config";
+
 import starlight from "@astrojs/starlight";
 import vue from "@astrojs/vue";
+
 import { locales } from "./src/locales.mjs";
 
 // The sidebar config runs before Astro loads content collections.
@@ -308,7 +311,7 @@ export default defineConfig({
         Head: "./src/components/Head.astro",
         MarkdownContent: "./src/components/MarkdownContent.astro",
         Footer: "./src/components/CompilerFooter.astro",
-        SocialIcons: "./src/components/HeaderLinks.astro",
+        SocialIcons: "@astrojs/starlight/components/SocialIcons.astro",
       },
     }),
   ],

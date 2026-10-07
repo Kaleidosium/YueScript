@@ -10,10 +10,9 @@ hero:
     - text: Início rápido →
       link: /pt-br/doc/
       variant: primary
-    - text: Ver no GitHub
-      link: https://github.com/IppClub/YueScript
+    - text: Experimente yue!
+      link: /pt-br/try/
       variant: minimal
-      icon: external
 title: YueScript
 sidebar:
   order: -1

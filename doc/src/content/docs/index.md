@@ -11,10 +11,9 @@ hero:
       link: /doc/
       variant: primary
       icon: open-book
-    - text: View on GitHub
-      link: https://github.com/IppClub/YueScript
+    - text: Try yue!
+      link: /try/
       variant: minimal
-      icon: external
 title: YueScript
 sidebar:
   order: -1

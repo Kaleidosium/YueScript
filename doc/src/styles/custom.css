@@ -21,7 +21,10 @@
   --font-serif: "Noto Serif", "Noto Serif SC", serif;
 
   /* --- BRAND COLORS (Original Moon Gold) --- */
-  --vp-c-brand-1: #b4ac8f;
+  --vp-c-brand-1: #f9c749;
+  --color-brand-hover: oklch(
+    from var(--vp-c-brand-1) calc(l - 0.21) calc(c * 1.15) h
+  );
   --color-brand: #b4ac8f;
   --color-on-brand: #0b0e14;
 }
@@ -341,7 +344,7 @@ starlight-lang-select select {
 .hero h1,
 .hero [data-page-title] {
   font-weight: 800 !important;
-  color: var(--sl-color-accent) !important;
+  color: var(--sl-color-accent-high) !important;
 }
 
 /* Utopia-style spacing interpolates between 20rem and 90rem viewports. */
@@ -365,7 +368,7 @@ starlight-lang-select select {
   display: flex;
   flex-wrap: wrap-reverse;
   gap: var(--home-space-l);
-  padding-block: var(--home-space-s);
+  padding-block: var(--home-space-xs);
   container-type: inline-size;
   container-name: hero;
 }
@@ -465,8 +468,9 @@ starlight-lang-select select {
 }
 
 .sl-link-button.primary:hover {
-  background-color: #a39b7d !important;
-  border-color: #a39b7d !important;
+  background-color: var(--color-brand-hover) !important;
+  color: #fdfbf7 !important;
+  border-color: var(--color-brand-hover) !important;
 }
 
 .sidebar-content .top-level .large {
@@ -502,7 +506,8 @@ button[data-yue-compile] {
 }
 
 button[data-yue-compile]:hover {
-  background-color: #a39b7d !important;
+  background-color: var(--color-brand-hover) !important;
+  color: #fdfbf7 !important;
 }
 
 /* --- HOME PAGE FEATURES & FOOTER --- */

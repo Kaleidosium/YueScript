@@ -10,10 +10,9 @@ hero:
     - text: 快速上手 →
       link: /zh/doc/
       variant: primary
-    - text: 在 GitHub 上查看
-      link: https://github.com/IppClub/YueScript
+    - text: 试试 yue！
+      link: /zh/try/
       variant: minimal
-      icon: external
 title: 月之脚本
 sidebar:
   order: -1
