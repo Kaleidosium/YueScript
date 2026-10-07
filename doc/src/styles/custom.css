@@ -50,6 +50,7 @@
   --sl-color-bg-accent: #b4ac8f;
   --sl-color-black: #0b0e14;
   --sl-color-gray-6: #2b364b;
+  --sl-color-gray-5: #1e293b;
   --sl-color-gray-4: #475569;
 
   /* Adjust border colors to blend with blue, not grey */
@@ -86,7 +87,9 @@
   --sl-color-bg-inline-code: #e9e5dc;
   --sl-color-bg-accent: #b4ac8f;
   --sl-color-black: #fdfbf7;
+  --sl-color-gray-7: #e9e5dc;
   --sl-color-gray-6: #fdfbf7;
+  --sl-color-gray-5: #c4bcae;
   --sl-color-gray-4: #827969;
 
   /* Borders / Hairlines */
