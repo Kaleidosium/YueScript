@@ -9,6 +9,7 @@ export const collections = {
     loader: i18nLoader(),
     schema: i18nSchema({
       extend: z.object({
+        "404.text": z.string().optional(),
         "yue.allInOne": z.string().optional(),
         "yue.try": z.string().optional(),
         "yue.404.home": z.string().optional(),

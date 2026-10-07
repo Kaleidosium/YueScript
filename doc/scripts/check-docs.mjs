@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+
 import { locales } from "../src/locales.mjs";
 
 const translations = Object.fromEntries(
@@ -241,7 +242,7 @@ assert.match(
 );
 assert.ok(
   notFound.includes(
-    "Page not found. Check the URL or try using the search bar.",
+    "Nothing here but Xiaoyu and her laptop! Check the URL or try using the search bar.",
   ),
   "Missing 404 message",
 );
